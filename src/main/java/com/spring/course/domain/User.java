@@ -49,10 +49,10 @@ public class User implements Serializable {
 	private Role role;
 	
 	// um usuario pode ter muitos pedidos
-	@OneToMany(mappedBy = "user") // ver como esta refenciado o atributo user(this.name in attribute) na classe Request
+	@OneToMany(mappedBy = "owner") // ver como esta refenciado o atributo user(this.name in attribute) na classe Request
 	private List<Request> requests = new ArrayList<>();
 	
 	// um usuario pode ter muitos estagio pedido
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "owner")
 	private List<RequestStage> stages = new ArrayList<>();
 }

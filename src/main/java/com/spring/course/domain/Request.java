@@ -56,8 +56,8 @@ public class Request implements Serializable {
 	
 	// muitos x 'pedidos' podem ter apenas 1 x 'usuarios'
 	@ManyToOne
-	@JoinColumn(name = "user_id", nullable = false )
-	private User user;
+	@JoinColumn(name = "owner_id", nullable = false )
+	private User owner;
 	
 	@OneToMany(mappedBy = "request") // ver como esta mapeado o atributo request(this.name ) na classe Request Stage
 	private List<RequestStage> stages = new ArrayList<>();
