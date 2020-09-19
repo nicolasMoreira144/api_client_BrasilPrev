@@ -2,9 +2,13 @@ package com.spring.course.repository;
 
 import java.util.List;
 
+
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.spring.course.domain.Request;
 import com.spring.course.domain.enums.RequestState;
@@ -14,7 +18,9 @@ public interface RequestRepository extends JpaRepository<Request, Long> {
 	
 	public List<Request> findAllByOwnerId(Long id);
 	
+	@Transactional(readOnly = false)
+	@Modifying
 	@Query("UPDATE request SET state = ?2 WHERE id = ?1")
-	public Request updateStatus(Long id, RequestState state);
+	public int updateStatus(Long id, RequestState state); // numero de linhas afetadas pelo update 
 
 }

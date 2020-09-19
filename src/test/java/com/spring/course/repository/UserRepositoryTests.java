@@ -29,12 +29,12 @@ public class UserRepositoryTests {
 		User user = new User(null, "Nicolas", "nicolassouza144@gmail.com", "123", Role.ADMINISTRATOR, null, null);
 		User createdUser = userRepository.save(user);
 
-		assertThat(createdUser.getId()).isEqualTo(1L);
+		assertThat(createdUser.getId()).isEqualTo(4L);
 	}
 
 	@Test
 	public void updateTest() {
-		User user = new User(1L, "Nicolas Souza", "nicolassouza144@gmail.com", "123", Role.ADMINISTRATOR, null, null);
+		User user = new User(4L, "Nicolas Souza", "nicolassouza144@gmail.com", "123", Role.ADMINISTRATOR, null, null);
 		User updatedUser = userRepository.save(user);
 
 		assertThat(updatedUser.getName()).isEqualTo("Nicolas Souza");
@@ -43,7 +43,7 @@ public class UserRepositoryTests {
 
 	@Test
 	public void getByIdTets() {
-		Optional<User> result = userRepository.findById(1L);
+		Optional<User> result = userRepository.findById(4L);
 		User user = result.get();
 
 		assertThat(user.getPassword()).isEqualTo("123");
@@ -52,7 +52,7 @@ public class UserRepositoryTests {
 	@Test
 	public void listTest() {
 		List<User> users = userRepository.findAll();
-		assertThat(users.size()).isEqualTo(1);
+		assertThat(users.size()).isEqualTo(1);// size not change
 	}
 
 	@Test
@@ -60,7 +60,7 @@ public class UserRepositoryTests {
 		Optional<User> result = userRepository.login("nicolassouza144@gmail.com", "123");
 		User loggedUser = result.get();
 	
-		assertThat(loggedUser.getId()).isEqualTo(1);
+		assertThat(loggedUser.getId()).isEqualTo(4);
 	}
 
 }
