@@ -13,6 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.spring.course.domain.enums.Role;
 
 import lombok.AllArgsConstructor;
@@ -41,6 +43,8 @@ public class User implements Serializable {
 	@Column(length = 75, nullable = false, unique = true)
 	private String email;
 	
+	@Getter(onMethod = @__({@JsonIgnore})) 
+	@Setter(onMethod = @__({@JsonProperty})) // ignorando a desereliazação da senha para não exibir
 	@Column(length = 100, nullable = false)
 	private String password;
 	
@@ -48,11 +52,11 @@ public class User implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Role role;
 	
-	// um usuario pode ter muitos pedidos
-	@OneToMany(mappedBy = "owner") // ver como esta refenciado o atributo user(this.name in attribute) na classe Request
+	@Getter(onMethod = @__({@JsonIgnore})) // ignorando a sereliazação dos pedidos
+	@OneToMany(mappedBy = "owner") // um usuario pode ter muitos pedidos // ver como esta refenciado o atributo user(this.name in attribute) na classe Request
 	private List<Request> requests = new ArrayList<>();
 	
-	// um usuario pode ter muitos estagio pedido
-	@OneToMany(mappedBy = "owner")
+	@Getter(onMethod = @__({@JsonIgnore})) // ignorando a sereliazação dos estagios
+	@OneToMany(mappedBy = "owner")// um usuario pode ter muitos estagio pedido
 	private List<RequestStage> stages = new ArrayList<>();
 }

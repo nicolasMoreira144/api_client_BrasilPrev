@@ -18,6 +18,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.spring.course.domain.enums.RequestState;
 
 import lombok.AllArgsConstructor;
@@ -59,6 +60,7 @@ public class Request implements Serializable {
 	@JoinColumn(name = "owner_id", nullable = false )
 	private User owner;
 	
+	@Getter(onMethod = @__({@JsonIgnore}))
 	@OneToMany(mappedBy = "request") // ver como esta mapeado o atributo request(this.name ) na classe Request Stage
 	private List<RequestStage> stages = new ArrayList<>();
 	
