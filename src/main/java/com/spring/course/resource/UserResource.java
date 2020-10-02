@@ -11,11 +11,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.course.domain.Request;
 import com.spring.course.domain.User;
 import com.spring.course.dto.UserLogindto;
+import com.spring.course.model.PageModel;
+import com.spring.course.model.PageRequestModel;
 import com.spring.course.service.RequestService;
 import com.spring.course.service.UserService;
 
@@ -28,7 +31,7 @@ public class UserResource {
 
 	@Autowired
 	private RequestService requestService;
-	
+
 	@PostMapping
 	public ResponseEntity<User> save(@RequestBody User user) {
 		User createdUser = userService.save(user);
@@ -49,22 +52,27 @@ public class UserResource {
 	}
 
 	@GetMapping
-	public ResponseEntity<List<User>> listAll() {
-		List<User> users = userService.listAll();
-		return ResponseEntity.ok(users);
+	public ResponseEntity<PageModel<User>> listAll(@RequestParam(value = "page") int page,
+			@RequestParam(value = "size") int size) {
+
+		PageRequestModel pr = new PageRequestModel(page, size);
+		PageModel<User> pm = userService.listAllOnLazyMode(pr);
+		return ResponseEntity.ok(pm);
 	}
 
+	@PostMapping("/login")
+	public ResponseEntity<User> login(@RequestBody UserLogindto user) {
+		User loggedUser = userService.login(user.getEmail(), user.getPassword());
+		return ResponseEntity.ok(loggedUser);
+	}
 
-	 @PostMapping("/login")
-	 public ResponseEntity<User> login (@RequestBody UserLogindto user){
-		 User loggedUser = userService.login(user.getEmail(), user.getPassword());
-		 return ResponseEntity.ok(loggedUser);
-	 }
-
-	 @GetMapping("/{id}/requests")
-		public ResponseEntity<List<Request>> listAllRequestsById(@PathVariable(name = "id") Long id) {
-			List<Request> requests = requestService.listAllByOwnerId(id);
-			return ResponseEntity.ok(requests);
-		}
+	@GetMapping("/{id}/requests")
+	public ResponseEntity<PageModel<Request>> listAllRequestsById(@PathVariable(name = "id") Long ownerId,
+			@RequestParam(value = "page") int page, @RequestParam(value = "size") int size) {
+		
+		PageRequestModel pr = new PageRequestModel(page, size);
+		PageModel<Request> pm = requestService.listAllByOwnerIdOnLazyModel(ownerId, pr);
+		return ResponseEntity.ok(pm);
+	}
 
 }
