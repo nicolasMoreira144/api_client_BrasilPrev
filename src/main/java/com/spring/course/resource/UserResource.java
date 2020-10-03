@@ -1,11 +1,10 @@
 package com.spring.course.resource;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.spring.course.domain.Request;
 import com.spring.course.domain.User;
 import com.spring.course.dto.UserLogindto;
+import com.spring.course.dto.UserUpdateRoledto;
 import com.spring.course.model.PageModel;
 import com.spring.course.model.PageRequestModel;
 import com.spring.course.service.RequestService;
@@ -73,6 +73,18 @@ public class UserResource {
 		PageRequestModel pr = new PageRequestModel(page, size);
 		PageModel<Request> pm = requestService.listAllByOwnerIdOnLazyModel(ownerId, pr);
 		return ResponseEntity.ok(pm);
+	}
+
+	@PatchMapping("/role/{id}")
+	public ResponseEntity<?> updateRole(@PathVariable(name = "id") Long id, @RequestBody UserUpdateRoledto userdto){
+		User user = new User();
+		user.setId(id);
+		user.setRole(userdto.getRole());
+		
+		userService.updateRole(user);
+		
+		return ResponseEntity.ok().build();
+	
 	}
 
 }
