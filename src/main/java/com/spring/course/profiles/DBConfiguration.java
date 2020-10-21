@@ -13,7 +13,7 @@ public class DBConfiguration {
 	@Profile("dev")
 	@Bean
 	public String devDatabaseConnection() {
-		System.out.println("test conection database dev ---------------->>>>>>>>>>>>>>>");
+		System.out.println("test conection database dev ---------------->>>>");
 		return "";
 	}
 
