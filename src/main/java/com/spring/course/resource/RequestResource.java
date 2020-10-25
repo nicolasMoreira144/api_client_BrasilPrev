@@ -34,9 +34,6 @@ public class RequestResource {
 	@Autowired
 	private RequestStageService stageService; 
 	
-	@Autowired
-	private AccessManager accessManager;
-	
 	@PostMapping
 	public ResponseEntity<Request> save (@RequestBody @Valid RequestSavedto requestdto){
 		Request requestToSave = requestdto.transformToRequest();
