@@ -13,59 +13,59 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.spring.course.domain.User;
+import com.spring.course.domain.Client;
 import com.spring.course.domain.enums.Role;
 
 @RunWith(SpringRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING) 
 @SpringBootTest
-public class UserRepositoryTests {
+public class ClientRepositoryTests {
 
 	@Autowired
-	private UserRepository userRepository;
+	private ClientRepository clientRepository;
 	
 	@Test // 'A' é proposital para esse metodo ser executado primeiro que todos isso é uma tecnica  
 	public void AsaveTest() {
-		User user = new User(null, "Nicolas", "nicolassouza144@gmail.com", "123", Role.ADMINISTRATOR, null, null);
-		User createdUser = userRepository.save(user);
+		Client client = new Client(null, "test", "12345678910", "rua direita", "test@gmail.com", Role.ADMINISTRATOR, "12345678");
+		Client createdClient = clientRepository.save(client);
 
-		assertThat(createdUser.getId()).isEqualTo(4L);
+		assertThat(createdClient.getId()).isEqualTo(4L);
 	}
 
 	@Test
 	public void updateTest() {
-		User user = new User(4L, "Nicolas Souza", "nicolassouza144@gmail.com", "123", Role.ADMINISTRATOR, null, null);
-		User updatedUser = userRepository.save(user);
+		Client client = new Client(null, "test", "12345678910", "rua direita", "test@gmail.com", Role.ADMINISTRATOR, "12345678");
+		Client updatedClient = clientRepository.save(client);
 
-		assertThat(updatedUser.getName()).isEqualTo("Nicolas Souza");
+		assertThat(updatedClient.getName()).isEqualTo("test");
 
 	}
 
 	@Test
 	public void getByIdTets() {
-		Optional<User> result = userRepository.findById(4L);
-		User user = result.get();
+		Optional<Client> result = clientRepository.findById(4L);
+		Client client = result.get();
 
-		assertThat(user.getPassword()).isEqualTo("123");
+		assertThat(client.getPassword()).isEqualTo("123");
 	}
 
 	@Test
 	public void listTest() {
-		List<User> users = userRepository.findAll();
+		List<Client> users = clientRepository.findAll();
 		assertThat(users.size()).isEqualTo(1);// size not change
 	}
 
 	@Test
 	public void loginTest() {
-		Optional<User> result = userRepository.login("nicolassouza144@gmail.com", "123");
-		User loggedUser = result.get();
+		Optional<Client> result = clientRepository.login("nicolassouza144@gmail.com", "123");
+		Client loggedUser = result.get();
 	
 		assertThat(loggedUser.getId()).isEqualTo(4);
 	}
 
 	@Test
 	public void updateRoleTest() {
-		int affectedRows = userRepository.updateRole(5L, Role.ADMINISTRATOR);
+		int affectedRows = clientRepository.updateRole(5L, Role.ADMINISTRATOR);
 		assertThat(affectedRows).isEqualTo(1);
 	}
 }

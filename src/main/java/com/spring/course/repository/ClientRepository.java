@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.spring.course.domain.Client;
-import com.spring.course.domain.User;
 import com.spring.course.domain.enums.Role;
 
 public interface ClientRepository extends JpaRepository<Client, Long>{

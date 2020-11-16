@@ -16,7 +16,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.spring.course.domain.Client;
-import com.spring.course.domain.User;
 import com.spring.course.exception.NotFoundException;
 import com.spring.course.model.PageModel;
 import com.spring.course.model.PageRequestModel;
