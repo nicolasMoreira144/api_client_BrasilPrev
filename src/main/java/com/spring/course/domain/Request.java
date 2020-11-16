@@ -64,7 +64,4 @@ public class Request implements Serializable {
 	@OneToMany(mappedBy = "request") // ver como esta mapeado o atributo request(this.name ) na classe Request Stage
 	private List<RequestStage> stages = new ArrayList<>();
 	
-	@Getter(onMethod = @__({@JsonIgnore}))
-	@OneToMany(mappedBy = "request") 
-	private List<RequestFile> files = new ArrayList<>();
 }

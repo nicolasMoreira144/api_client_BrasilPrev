@@ -14,7 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.spring.course.service.UserService;
+import com.spring.course.service.ClientService;
 
 @Configuration
 @EnableWebSecurity
@@ -22,19 +22,21 @@ import com.spring.course.service.UserService;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
-	private UserService userService;
+	private ClientService clientService;
 	
 	@Autowired
 	private CustomPasswordEncoder passwordEncoder;
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userService).passwordEncoder(passwordEncoder);
+		auth.userDetailsService(clientService).passwordEncoder(passwordEncoder);
 	}
 	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers(HttpMethod.POST , "/users/login");
+		web.ignoring().antMatchers(HttpMethod.POST , "/clients/login");
+		//web.ignoring().antMatchers(HttpMethod.POST , "/clients");
+		
 	}
 	
 
@@ -45,6 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.anyRequest().authenticated();
 		
 		http.addFilterBefore(new AuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
+		   //http.authorizeRequests().antMatchers("/").permitAll();
 	}
 	
 	@Bean(name = BeanIds.AUTHENTICATION_MANAGER)
