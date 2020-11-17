@@ -13,9 +13,8 @@ Como devemos usar?
 Executar o metodo AsaveTest() da classe ClientRepositoryTests para cadastrar um cliente.
 Apos ter o cliente cadastrado na base podemos tentar fazer o login 
 
-Exemplo 
-
-Exemplo requisição [/clients/login] tipo: post
+ 
+Exemplo requisição [/clients/login] tipo: POST
 
 {
     "email": "test@gmail.com",
@@ -26,7 +25,7 @@ Exemplo requisição [/clients/login] tipo: post
 Exemplo retorno [/clients/login]   
 
 {
-    "token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwZWRyby5zb3V6YUBnbWFpbC5jb20iLCJleHAiOjE2MDU5ODg0NDgsInJvbGUiOlsiUk9MRV9BRE1JTklTVFJBVE9SIl19.CEn_iiKgFJEYs-X1XRYKlEI3FtcTTe5svbMQNxZMC-Tz0qMAYI440dq02kf0a1g4VXr5Oysi6mTBFWoxguh39w",
+    "token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwZWRyby5zb3V6YUBnbWFpbC5jb20iLCJleHAiOjE2MDU5ODg0NDgsInJvbGUiOlsiUk9MRV9BRE1JTklTVFJBVE9SIl19.CEn_iiKgFJEYs-	X1XRYKlEI3FtcTTe5svbMQNxZMC-Tz0qMAYI440dq02kf0a1g4VXr5Oysi6mTBFWoxguh39w",
     "expireIn": 1605988448006,
     "tokenprovider": "Bearer"
 }
@@ -61,7 +60,7 @@ Exemplo retorno [/clients/1]
 
 
 
-Exemplo requisição [/clients/1] tipo: POST 
+Exemplo requisição [/clients] tipo: POST 
 
 Necessário perfil de Administrador
 {   
@@ -75,13 +74,13 @@ Necessário perfil de Administrador
 }   
 Obs: a senha está sendo salva na base criptografada
 
-Exemplo retorno [/clients/1] 
+Exemplo retorno [/clients] 
 
 {
     "id": 3,
     "name": "Thiago",
     "cpf": "43256789756",
-    "address": "rua esquerda",
+    "address": "rua 9 de julho",
     "email": "thiago@gmail.com",
     "role": "ADMINISTRATOR"
 }
@@ -90,21 +89,20 @@ Exemplo retorno [/clients/1]
 Exemplo requisição [/clients/1] tipo: PUT
 
 {   
-    "name": "Thiago",
+    "name": "Nicolas Moreira",
     "cpf": "43256789756",
-    "address": "rua 9 de julho",
-    "email": "thiago@gmail.com",
-    "role": "ADMINISTRATOR",
-    "password": "12345678"
+    "address": "rua São Bento",
+    "email": "nicolas.souza@gmail.com",
+    "password": "123456789"
 	
 }
-Exemplo retorno [/clients/1] 
 
+Exemplo retorno [/clients/1] 
 {
     "id": 1,
     "name": "Nicolas Moreira",
     "cpf": "43256789756",
-    "address": "rua esquerda",
+    "address": "rua São Bento",
     "email": "nicolas.souza@gmail.com"
 }
 
@@ -128,7 +126,7 @@ Não tem retorno
 
 Principais Ferramentas utilizadas: Banco mysql, Hibernate para implementação da JPA, Spring Boot e Security, Junit para testes unitarios, JWT token. 
 
-pode ser que o Eclipse ou outra IDE que você for utilizar não reconhece as anotações @Getter e @Setter será necessário 
+Pode ser que o Eclipse ou outra IDE que você for utilizar não reconhece as anotações @Getter e @Setter será necessário 
 
 Ir no jar e executá-lo manualmente 
 
