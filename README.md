@@ -113,7 +113,7 @@ Traz a lista de clientes
 
 
 Exemplo requisição [/clients/role/7] tipo patch 
-
+Necessário perfil de Administrador
 {
     "role" : "ADMINISTRATOR"
 }
